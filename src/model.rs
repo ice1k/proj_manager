@@ -1,5 +1,6 @@
-type str_ref = &'static str;
+pub type str_ref = &'static str;
 
+// #[derive()]
 pub struct Config {
 	proj_name: str_ref,
 	path: str_ref,
@@ -14,5 +15,9 @@ impl Config {
 			proj_name: proj_name,
 			path: path
 		}
+	}
+
+	pub fn get_path(&self) -> str_ref {
+		self.path
 	}
 }
