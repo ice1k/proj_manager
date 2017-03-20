@@ -1,23 +1,29 @@
-pub type str_ref = &'static str;
+pub type StrType = &'static str;
 
 // #[derive()]
 pub struct Config {
-	proj_name: str_ref,
-	path: str_ref,
-	//
+	proj_name: StrType,
+	path: StrType,
+	ignored: Vec<StrType>,
 }
 
 impl Config {
 	pub fn new(
-				proj_name: str_ref,
-				path: str_ref) -> Config {
+				proj_name: StrType,
+				path: StrType,
+				ignored: Vec<StrType>) -> Config {
 		Config {
 			proj_name: proj_name,
-			path: path
+			path: path,
+			ignored: ignored,
 		}
 	}
 
-	pub fn get_path(&self) -> str_ref {
+	pub fn get_path(&self) -> StrType {
 		self.path
+	}
+
+	pub fn get_proj_name(&self) -> StrType {
+		self.proj_name
 	}
 }
