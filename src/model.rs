@@ -33,4 +33,12 @@ impl Config {
 	pub fn proj_name(&self) -> StrType {
 		self.proj_name.clone()
 	}
+
+	pub fn ignored(&self) -> Vec<StrType> {
+		self.ignored.clone()
+	}
+
+	pub fn ignored_suffix(&self) -> Vec<StrType> {
+		self.ignored_suffix.clone()
+	}
 }
