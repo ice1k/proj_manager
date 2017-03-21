@@ -5,10 +5,6 @@ use std::path::{PathBuf};
 use std::io::{BufRead, BufReader};
 // use std::io::prelude::*;
 
-pub fn reload() {
-	//
-}
-
 fn open_file(path: StrType) -> Option<File> {
 	match File::open(path) {
 		Ok(f) => Some(f),
