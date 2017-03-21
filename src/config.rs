@@ -5,14 +5,14 @@ use std::path::{PathBuf};
 use std::io::{BufRead, BufReader};
 // use std::io::prelude::*;
 
-fn open_file(path: StrType) -> Option<File> {
+fn open_file(path: String) -> Option<File> {
 	match File::open(path) {
 		Ok(f) => Some(f),
 		_ => None,
 	}
 }
 
-pub fn parse_config(path: StrType) -> Option<Config> {
+pub fn parse_config(path: String) -> Option<Config> {
 	let file = match open_file(path.clone()) {
 		Some(f) => f,
 		None => return None,
