@@ -70,7 +70,7 @@ pub fn print_code_line_sum(cfg: &Config) {
 			},
 			_ => { },
 		}
-		println!("In {}: \t{} lines, \t{} per line.", path.display(), lines, size / lines);
+		println!("In {:<26}=> {} lines, {} per line.", path.display(), lines, size / lines);
 		unsafe {
 			sum += lines;
 		}

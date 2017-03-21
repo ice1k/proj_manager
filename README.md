@@ -4,4 +4,4 @@ This is a simple project manager, which gives you data about your project, to he
 
 It's written in Rust.
 
-I write this project to practise programming.
+I write this project to practise Rust programming.
