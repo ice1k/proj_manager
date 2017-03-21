@@ -1,11 +1,9 @@
 use model::*;
 
 use std::fs::File;
-use std::path::{Path};
+use std::path::{PathBuf};
 use std::io::{BufRead, BufReader};
 // use std::io::prelude::*;
-
-// to_string
 
 pub fn reload() {
 	//
@@ -19,26 +17,29 @@ fn open_file(path: StrType) -> Option<File> {
 }
 
 pub fn parse_config(path: StrType) -> Option<Config> {
-	let path_obj = match Path::new(path).to_str() {
-		Some(s) => s,
-		None => return None,
-	};
-	let file = match open_file(path) {
+	let file = match open_file(path.clone()) {
 		Some(f) => f,
 		None => return None,
 	};
-	let ignored = Vec::new();
-	let ignored_suffix = Vec::new();
+	let mut ignored = Vec::new();
+	let mut ignored_suffix = Vec::new();
 	let buf = BufReader::new(file);
+	let mut build = String::from("echo No build script.");
 	for ln in BufRead::lines(buf) {
-		let ln = ln.unwrap_or(String::from(""));
-		if ln.starts_with("ignore:") {
-			// ignore.push(ln.sub)
-		} else if ln.starts_with("ignore-suffix:") {
-			//
-		} else if ln.starts_with("") {
-			//
+		let mut ln = ln.unwrap_or(String::from(""));
+		if ln.starts_with("ign:") {
+			ignored.push(ln.drain(4..).collect());
+		} else if ln.starts_with("ign-sfx:") {
+			ignored_suffix.push(ln.drain(8..).collect());
+		} else if ln.starts_with("build:") {
+			build = ln.drain(6..).collect();
 		}
 	}
-	Some(Config::new("", path_obj, ignored, ignored_suffix))
+	Some(Config::new(
+			String::new(),
+			path,
+			ignored,
+			ignored_suffix,
+			build
+	))
 }
