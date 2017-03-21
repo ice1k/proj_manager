@@ -23,6 +23,7 @@ fn main() {
 	for i in cfg.ignored_suffix() {
 		println!("{} ", i);
 	}
+	println!("");
 	visit_files(&cfg, Path::new("."), &visit_print);
 }
 

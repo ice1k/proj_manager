@@ -45,4 +45,17 @@ impl Config {
 	pub fn build(&self) -> Vec<StrType> {
 		self.build.clone()
 	}
+
+	pub fn is_ignored(&self, name: &StrType) -> bool {
+		self.ignored.contains(name)
+	}
+
+	pub fn is_ignored_suffix(&self, name: &StrType) -> bool {
+		for sfx in &self.ignored_suffix {
+			if name.ends_with(sfx) {
+				return true;
+			}
+		}
+		false
+	}
 }
