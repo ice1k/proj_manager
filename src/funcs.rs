@@ -20,10 +20,11 @@ pub fn go_die() -> ! {
 /// print help
 pub fn print_help() {
 	println!("Commands:");
-	println!("data           -- prints the meta data stored in the cofiguration file.");
-	println!("ls             -- prints the files.");
+	println!("data           -- print the meta data stored in the cofiguration file.");
+	println!("ls             -- print all the files.");
 	println!("exit           -- exit project manager.");
 	println!("help           -- print this doc.");
+	println!("line           -- see how many lines of code is here in your project.");
 }
 
 /// print meta data
