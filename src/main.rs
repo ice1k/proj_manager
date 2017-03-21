@@ -1,11 +1,30 @@
 mod config;
 mod model;
 mod files;
+mod funcs;
 
-use std::path::Path;
+use std::io::{Result, stdin};
 
 use config::*;
-use files::*;
+use model::*;
+use funcs::*;
+use std::process::exit;
+
+fn repl(cfg: &Config) -> Result<()> {
+	let name = cfg.proj_name();
+	loop {
+		let mut input = String::new();
+		stdin().read_line(&mut input);
+		let i = input.trim();
+		match i {
+			"data" => print_meta(cfg),
+			"ls" => print_files(cfg),
+			"help" => print_help(),
+			"exit" => exit(0),
+			_ => println!("Unknown command: {}", i),
+		}
+	}
+}
 
 fn main() {
 	// println!("{}", parse_config("./Cargo.toml"));
@@ -13,17 +32,7 @@ fn main() {
 		Some(c) => c,
 		None => panic!("internal error!"),
 	};
-	println!("\npath:");
-	println!("{}", cfg.path());
-	println!("\n\nignored:");
-	for i in cfg.ignored() {
-		println!("{} ", i);
-	}
-	println!("\n\nignored_suffix:");
-	for i in cfg.ignored_suffix() {
-		println!("{} ", i);
-	}
-	println!("");
-	visit_files(&cfg, Path::new("."), &visit_print);
+	println!("Load success.");
+	repl(&cfg);
 }
 
