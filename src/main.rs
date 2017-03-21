@@ -9,11 +9,13 @@ fn main() {
 		Some(c) => c,
 		None => panic!("internal error!"),
 	};
+	println!("\npath:");
 	println!("{}", cfg.path());
+	println!("\n\nignored:");
 	for i in cfg.ignored() {
 		print!("{} ", i);
 	}
-	println!("");
+	println!("\n\nignored_suffix:");
 	for i in cfg.ignored_suffix() {
 		print!("{} ", i);
 	}

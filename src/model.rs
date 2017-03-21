@@ -7,7 +7,7 @@ pub struct Config {
 	path: StrType,
 	ignored: Vec<StrType>,
 	ignored_suffix: Vec<StrType>,
-	build: StrType,
+	build: Vec<StrType>,
 }
 
 impl Config {
@@ -16,7 +16,7 @@ impl Config {
 				path: StrType,
 				ignored: Vec<StrType>,
 				ignored_suffix: Vec<StrType>,
-				build: StrType) -> Config {
+				build: Vec<StrType>) -> Config {
 		Config {
 			proj_name: proj_name,
 			path: path,
@@ -40,5 +40,9 @@ impl Config {
 
 	pub fn ignored_suffix(&self) -> Vec<StrType> {
 		self.ignored_suffix.clone()
+	}
+
+	pub fn build(&self) -> Vec<StrType> {
+		self.build.clone()
 	}
 }

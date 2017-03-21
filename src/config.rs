@@ -24,7 +24,8 @@ pub fn parse_config(path: StrType) -> Option<Config> {
 	let mut ignored = Vec::new();
 	let mut ignored_suffix = Vec::new();
 	let buf = BufReader::new(file);
-	let mut build = String::from("echo No build script.");
+	let mut proj_name = String::from("Unknown project name");
+	let mut build = Vec::new();
 	for ln in BufRead::lines(buf) {
 		let mut ln = ln.unwrap_or(String::from(""));
 		if ln.starts_with("ign:") {
@@ -32,11 +33,15 @@ pub fn parse_config(path: StrType) -> Option<Config> {
 		} else if ln.starts_with("ign-sfx:") {
 			ignored_suffix.push(ln.drain(8..).collect());
 		} else if ln.starts_with("build:") {
-			build = ln.drain(6..).collect();
+			build.push(ln.drain(6..).collect());
+		} else if ln.starts_with("name:") {
+			proj_name = ln.drain(5..).collect();
+		} else {
+			// ignore unknown commands
 		}
 	}
 	Some(Config::new(
-			String::new(),
+			proj_name,
 			path,
 			ignored,
 			ignored_suffix,
