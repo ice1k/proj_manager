@@ -76,6 +76,6 @@ pub fn print_code_line_sum(cfg: &Config) {
 		}
 	});
 	unsafe {
-		println!("Total: {} lines.", sum);
+		println!("Total: {} lines of code.", sum);
 	}
 }
