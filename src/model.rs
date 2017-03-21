@@ -5,25 +5,28 @@ pub struct Config {
 	proj_name: StrType,
 	path: StrType,
 	ignored: Vec<StrType>,
+	ignored_suffix: Vec<StrType>,
 }
 
 impl Config {
 	pub fn new(
 				proj_name: StrType,
 				path: StrType,
-				ignored: Vec<StrType>) -> Config {
+				ignored: Vec<StrType>,
+				ignored_suffix: Vec<StrType>) -> Config {
 		Config {
 			proj_name: proj_name,
 			path: path,
 			ignored: ignored,
+			ignored_suffix: ignored_suffix,
 		}
 	}
 
-	pub fn get_path(&self) -> StrType {
+	pub fn path(&self) -> StrType {
 		self.path
 	}
 
-	pub fn get_proj_name(&self) -> StrType {
+	pub fn proj_name(&self) -> StrType {
 		self.proj_name
 	}
 }

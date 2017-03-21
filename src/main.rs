@@ -9,6 +9,6 @@ fn main() {
 		Some(c) => c,
 		None => panic!("internal error!"),
 	};
-	println!("{}", cfg.get_path());
+	println!("{}", cfg.path());
 }
 
