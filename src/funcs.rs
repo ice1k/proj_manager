@@ -71,12 +71,34 @@ pub fn print_code_line_sum(cfg: &Config) {
 			},
 			_ => { },
 		}
-		println!("In {:<26}=> {} lines, {} per line.", path.display(), lines, size / lines);
+		println!("In {:<26} => {} lines, {} per line.", path.display(), lines, size / lines);
 		unsafe {
 			sum += lines;
 		}
 	});
 	unsafe {
 		println!("Total: {} lines of code.", sum);
+	}
+}
+
+pub fn print_git_data(cfg: &Config) {
+	let status = match Command::new("git")
+			.arg("status")
+			.output() {
+		Ok(o) => o.stdout,
+		_ => {
+			println!("Not a git repository.");
+			return;
+		}
+	};
+	let mut git_branch_found = false;
+	for (index, c) in status
+			.as_slice()
+			.into_iter()
+			.enumerate() {
+		if (*c == '\n' as u8) && !git_branch_found {
+			println!("{}", String::from_utf8(status.));
+			git_branch_found = true;
+		}
 	}
 }
