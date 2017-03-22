@@ -7,5 +7,5 @@ ign-sfx:o
 ign-sfx:jar
 ign-sfx:class
 ign-sfx:d
-build:Cargo build --release
+build:build.bat
 name:project manager

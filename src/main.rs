@@ -26,6 +26,7 @@ fn repl(cfg: &Config) -> Result<()> {
 			"exit" => go_die(),
 			"line" => print_code_line_sum(cfg),
 			"git" => print_git_data(cfg),
+			// "build" => build_proj(cfg),
 			// "cls" => clear_screen(),
 			_ => println!("Unknown command: {}", i),
 		}
@@ -42,8 +43,9 @@ fn main() {
 	println!("proj_manager v0.1.0, open source under GNU General Public License v3.0.");
 	println!("See: https://github.com/ice1000/proj_manager");
 	println!("Load success.");
+	println!("Input \"help\" to get help.");
+	println!("");
 
-	#[allow(unused_must_use)]
 	repl(&cfg);
 }
 

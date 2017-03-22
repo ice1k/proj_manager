@@ -38,9 +38,13 @@ pub fn print_meta(cfg: &Config) {
 	for i in cfg.ignored() {
 		println!("\t{} ", i);
 	}
-	println!("Ignored_suffix:");
+	println!("Ignored Suffix:");
 	for i in cfg.ignored_suffix() {
-		println!("\t*.{} ", i);
+		println!("\t{} ", i);
+	}
+	println!("Build Script:");
+	for i in cfg.build() {
+		println!("\t{} ", i);
 	}
 }
 
@@ -84,18 +88,41 @@ pub fn print_code_line_sum(cfg: &Config) {
 }
 
 pub fn print_git_data(cfg: &Config) {
-	println!("{}", cfg.proj_name());
+	// println!("In project {}:", cfg.proj_name());
 	let status = match Command::new("git")
 			.arg("status")
 			.output() {
-		Ok(o) => o.stdout,
+		Ok(o) => {
+			println!("Git root detected in {}.", cfg.proj_name());
+			o.stdout
+		},
 		_ => {
-			println!("Not a git repository.");
+			println!("{} is not a git repository.", cfg.proj_name());
 			return;
 		}
 	};
 	let info = String::from_utf8(status.clone()).unwrap();
 	for ln in info.lines() {
-		println!("{}", ln);
+		// let ln = ln.trim();
+		if !ln.starts_with("  (use \"git ") &&
+				!ln.starts_with("no changes added to commit") &&
+				!ln.trim().is_empty() {
+			println!("{}", ln);
+		}
 	}
 }
+
+#[allow(dead_code)]
+pub fn build_proj(cfg: &Config) {
+	for i in cfg.build() {
+		println!("Running: {}", i);
+		match Command::new("call").arg(&i).output() {
+			Ok(o) => println!("{}", String::from_utf8(o.stdout).unwrap()),
+			_ => {
+				println!("Error while running this command!");
+				break;
+			},
+		}
+	}
+}
+
