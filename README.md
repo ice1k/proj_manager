@@ -6,6 +6,8 @@ It's written in Rust.
 
 I write this project to practise Rust programming.
 
+For I'm a beginner to Rust, there must be some naive code, please don't hesitate to point it out :joy:.
+
 ## Get binary!
 
 ### Windows

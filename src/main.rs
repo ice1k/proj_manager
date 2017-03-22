@@ -9,8 +9,11 @@ use config::*;
 use model::*;
 use funcs::*;
 
+#[allow(unused_must_use)]
 fn repl(cfg: &Config) -> Result<()> {
+	#[allow(unused_variables)]
 	let name = cfg.proj_name();
+
 	loop {
 		let mut input = String::new();
 		stdin()
@@ -39,6 +42,8 @@ fn main() {
 	println!("proj_manager v0.1.0, open source under GNU General Public License v3.0.");
 	println!("See: https://github.com/ice1000/proj_manager");
 	println!("Load success.");
+
+	#[allow(unused_must_use)]
 	repl(&cfg);
 }
 

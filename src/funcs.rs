@@ -3,7 +3,7 @@ use files::*;
 
 use std::path::Path;
 use std::fs::{DirEntry, File};
-use std::io::{Read, Error};
+use std::io::Read;
 use std::process::{exit, Command};
 
 /// exit
@@ -82,6 +82,7 @@ pub fn print_code_line_sum(cfg: &Config) {
 }
 
 pub fn print_git_data(cfg: &Config) {
+	println!("{}", cfg.proj_name());
 	let status = match Command::new("git")
 			.arg("status")
 			.output() {
