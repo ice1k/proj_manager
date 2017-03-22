@@ -22,6 +22,17 @@ pub fn parse_config(path: String) -> Option<Config> {
 	let buf = BufReader::new(file);
 	let mut proj_name = String::from("Unknown project name");
 	let mut build = Vec::new();
+	let mut indent_line_1 = 32;
+	let mut indent_line_2 = 4;
+	let mut indent_line_3 = 4;
+	// let signs = [
+	// 	"ign:",
+	// 	"ign-sfx:",
+	// 	"build:",
+	// 	"name:",
+	// 	"idt-line-1:",
+	// 	"idt-line-2:"
+	// ];
 	for ln in BufRead::lines(buf) {
 		let mut ln = ln.unwrap_or(String::from(""));
 		if ln.starts_with("ign:") {
@@ -32,6 +43,15 @@ pub fn parse_config(path: String) -> Option<Config> {
 			build.push(ln.drain(6..).collect());
 		} else if ln.starts_with("name:") {
 			proj_name = ln.drain(5..).collect();
+		} else if ln.starts_with("idt-line-1:") {
+			let s: String = ln.drain(11..).collect();
+			indent_line_1 = s.parse().unwrap();
+		} else if ln.starts_with("idt-line-2:") {
+			let s: String = ln.drain(11..).collect();
+			indent_line_2 = s.parse().unwrap();
+		} else if ln.starts_with("idt-line-3:") {
+			let s: String = ln.drain(11..).collect();
+			indent_line_3 = s.parse().unwrap();
 		} else {
 			// ignore unknown commands
 		}
@@ -41,6 +61,9 @@ pub fn parse_config(path: String) -> Option<Config> {
 			path,
 			ignored,
 			ignored_suffix,
-			build
+			build,
+			indent_line_1,
+			indent_line_2,
+			indent_line_3
 	))
 }

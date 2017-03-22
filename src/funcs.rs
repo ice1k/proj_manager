@@ -77,7 +77,13 @@ pub fn print_code_line_sum(cfg: &Config) {
 			},
 			_ => { },
 		}
-		println!("In {:<26} => {} lines, {} per line.", path.display(), lines, size / lines);
+		let file_name = format!("{}", path.display());
+		println!("In {:<indent_1$} => {:<4} lines, {:<4} per line.",
+				file_name,
+				lines,
+				size / lines,
+				indent_1 = cfg.indent_line_1() as usize
+		);
 		unsafe {
 			sum += lines;
 		}

@@ -8,6 +8,9 @@ pub struct Config {
 	ignored: Vec<String>,
 	ignored_suffix: Vec<String>,
 	build: Vec<String>,
+	indent_line_1: u8,
+	indent_line_2: u8,
+	indent_line_3: u8,
 }
 
 #[allow(dead_code)]
@@ -17,13 +20,19 @@ impl Config {
 				path: String,
 				ignored: Vec<String>,
 				ignored_suffix: Vec<String>,
-				build: Vec<String>) -> Config {
+				build: Vec<String>,
+				indent_line_1: u8,
+				indent_line_2: u8,
+				indent_line_3: u8) -> Config {
 		Config {
 			proj_name: proj_name,
 			path: path,
 			ignored: ignored,
 			ignored_suffix: ignored_suffix,
 			build: build,
+			indent_line_1: indent_line_1,
+			indent_line_2: indent_line_2,
+			indent_line_3: indent_line_3,
 		}
 	}
 
@@ -45,6 +54,18 @@ impl Config {
 
 	pub fn build(&self) -> Vec<String> {
 		self.build.clone()
+	}
+
+	pub fn indent_line_1(&self) -> u8 {
+		self.indent_line_1.clone()
+	}
+
+	pub fn indent_line_2(&self) -> u8 {
+		self.indent_line_2.clone()
+	}
+
+	pub fn indent_line_3(&self) -> u8 {
+		self.indent_line_3.clone()
 	}
 
 	pub fn is_ignored(&self, name: &String) -> bool {

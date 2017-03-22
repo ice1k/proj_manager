@@ -1,3 +1,4 @@
+name:project_manager
 ign:Cargo.lock
 ign:.idea
 ign:.git
@@ -8,4 +9,5 @@ ign-sfx:jar
 ign-sfx:class
 ign-sfx:d
 build:build.bat
-name:project manager
+idt-line-1:16
+idt-line-2:4
