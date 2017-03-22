@@ -25,6 +25,7 @@ pub fn print_help() {
 	println!("exit           -- exit project manager.");
 	println!("help           -- print this doc.");
 	println!("line           -- see how many lines of code is here in your project.");
+	println!("git            -- print git status.");
 }
 
 /// print meta data

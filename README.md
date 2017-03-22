@@ -44,33 +44,23 @@ line           -- see how many lines of code is here in your project.
 You can see how many lines of code is here in your project:
 
 ```
-In .\.gitignore              => 11 lines, 6 per line.
-In .\install.bat             => 27 lines, 9 per line.
-In .\install.sh              => 26 lines, 11 per line.
-In .\LICENSE                 => 675 lines, 52 per line.
-In .\proj_config             => 5 lines, 14 per line.
-In .\README.md               => 92 lines, 19 per line.
-In .\src\doc.go              => 10 lines, 11 per line.
-In .\src\dp\core\check.go    => 262 lines, 17 per line.
-In .\src\dp\core\check_test.go=> 37 lines, 21 per line.
-In .\src\dp\core\equation.go => 46 lines, 16 per line.
-In .\src\dp\core\gen.go      => 115 lines, 24 per line.
-In .\src\dp\core\gen_test.go => 27 lines, 17 per line.
-In .\src\dp\core\parse.go    => 137 lines, 20 per line.
-In .\src\dp\core\parse_test.go=> 34 lines, 25 per line.
-In .\src\dp\core\repl.go     => 86 lines, 19 per line.
-In .\src\dp\core\style.go    => 16 lines, 15 per line.
-In .\src\dp\msg\error.go     => 43 lines, 14 per line.
-In .\src\dp\msg\error_test.go=> 21 lines, 19 per line.
-In .\src\dp\util\algo\stack.go=> 52 lines, 13 per line.
-In .\src\dp\util\algo\stack_test.go=> 23 lines, 11 per line.
-In .\src\dp\util\sb\sb.go    => 83 lines, 19 per line.
-In .\src\dp\util\sb\sb_test.go=> 32 lines, 17 per line.
-In .\src\dp\util\util.go     => 62 lines, 16 per line.
-In .\src\dp\util\util_test.go=> 170 lines, 14 per line.
-In .\src\main.go             => 19 lines, 10 per line.
-Total: 2111 lines of code.
+In .\.gitignore                     => 8    lines, 5    per line.
+In .\build.bat                      => 14   lines, 35   per line.
+In .\Cargo.toml                     => 8    lines, 20   per line.
+In .\clean.bat                      => 10   lines, 41   per line.
+In .\LICENSE                        => 675  lines, 52   per line.
+In .\proj_config                    => 13   lines, 12   per line.
+In .\src\bin\command.rs             => 12   lines, 18   per line.
+In .\src\bin\string_apis.rs         => 8    lines, 11   per line.
+In .\src\config.rs                  => 70   lines, 24   per line.
+In .\src\files.rs                   => 34   lines, 24   per line.
+In .\src\funcs.rs                   => 135  lines, 23   per line.
+In .\src\main.rs                    => 52   lines, 22   per line.
+In .\src\model.rs                   => 84   lines, 18   per line.
+Total: 1123 lines of code.
 ```
+
+You can even customize the indent, just add config 'idt-line-1', 'idt-line-2', 'idt-line-3' in your config file.
 
 You can customize the it's behavior by editing the cofiguration file:
 
