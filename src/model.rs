@@ -1,7 +1,7 @@
 // pub type String = String;
 // pub type String = &'static str;
 
-// #[derive()]
+#[allow(dead_code)]
 pub struct Config {
 	proj_name: String,
 	path: String,
@@ -10,6 +10,7 @@ pub struct Config {
 	build: Vec<String>,
 }
 
+#[allow(dead_code)]
 impl Config {
 	pub fn new(
 				proj_name: String,

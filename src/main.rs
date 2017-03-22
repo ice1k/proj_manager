@@ -9,9 +9,8 @@ use config::*;
 use model::*;
 use funcs::*;
 
-#[allow(unused_must_use)]
+#[allow(unused_must_use, unused_variables)]
 fn repl(cfg: &Config) -> Result<()> {
-	#[allow(unused_variables)]
 	let name = cfg.proj_name();
 
 	loop {
@@ -33,6 +32,7 @@ fn repl(cfg: &Config) -> Result<()> {
 	}
 }
 
+#[allow(unused_must_use)]
 fn main() {
 	// println!("{}", parse_config("./Cargo.toml"));
 	let cfg = match parse_config(String::from("./proj_config")) {

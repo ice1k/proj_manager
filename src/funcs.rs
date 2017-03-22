@@ -45,6 +45,7 @@ pub fn print_meta(cfg: &Config) {
 }
 
 /// list the files
+#[allow(unused_must_use)]
 pub fn print_files(cfg: &Config) {
 	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
 		println!("{}", e.path().display());
@@ -52,6 +53,7 @@ pub fn print_files(cfg: &Config) {
 }
 
 /// print how many lines of code is here
+#[allow(unused_must_use)]
 pub fn print_code_line_sum(cfg: &Config) {
 	static mut sum: u64 = 0;
 	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
