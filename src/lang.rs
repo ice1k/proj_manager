@@ -14,6 +14,16 @@ trait Lang : ToString {
 	}
 }
 
+macro_rules! to_str_by_name_impl {
+	($x: ident) => {
+		impl ToString for $x {
+			fn to_string(&self) -> String {
+				self.name.clone()
+			}
+		}
+	}
+}
+
 struct SimpleLang {
 	suffix: String,
 	name: String,
@@ -25,18 +35,52 @@ impl Lang for SimpleLang {
 	}
 }
 
-impl ToString for SimpleLang {
-	fn to_string(&self) -> String {
-		self.name.clone()
-	}
-}
-
 impl SimpleLang {
-	fn new<'a>(suffix: &'a str, name: &'a str) -> SimpleLang {
+	fn new<'a>(name: &'a str, suffix: &'a str) -> SimpleLang {
 		SimpleLang {
 			suffix: String::from(suffix),
 			name: String::from(name),
 		}
+	}
+}
+
+struct ComplexLang {
+	suffixes: Vec<String>,
+	name: String,
+}
+
+impl Lang for ComplexLang {
+	fn match_str(&self, s: String) -> bool {
+		for i in &self.suffixes {
+			if s.ends_with(i) {
+				return true;
+			}
+		}
+		false
+	}
+}
+
+impl ComplexLang {
+	fn new<'a>(name: &'a str, suffixes: Vec<String>) -> ComplexLang {
+		ComplexLang {
+			name: String::from(name),
+			suffixes: suffixes,
+		}
+	}
+}
+
+to_str_by_name_impl!(SimpleLang);
+to_str_by_name_impl!(ComplexLang);
+
+macro_rules! slang {
+	($x: expr, $y: expr) => {
+		SimpleLang::new($x, $y)
+	}
+}
+
+macro_rules! clang {
+	($x: expr, $($y: expr),+) => {
+		ComplexLang::new($x, vec!( $(y)+ ))
 	}
 }
 
@@ -51,12 +95,18 @@ impl SimpleLang {
 // }
 
 pub fn judge_lang_path(p: &Path) -> String {
-	let s_langs = [
-		SimpleLang::new(".java", "Java"),
-		SimpleLang::new(".go", "Golang"),
-		SimpleLang::new(".rs", "Rust"),
+	let langs = [
+		slang!("Java", ".java"),
+		slang!("Golang", ".go"),
+		slang!("Rust", ".rs"),
+		slang!("Coq", ".v"),
+		slang!("Clojure", ".clj"),
+		slang!("Scala", ".scala"),
+		slang!("C#", ".cs"),
+		slang!("Ruby", ".rb"),
+		clang!("C++", "cpp", "hpp"),
 	];
-	for i in &s_langs {
+	for i in &langs {
 		if i.match_path(p) {
 			return i.to_string();
 		}

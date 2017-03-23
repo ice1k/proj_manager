@@ -103,6 +103,11 @@ pub fn print_code_line_sum(cfg: &Config) {
 
 pub fn print_git_data(cfg: &Config) {
 	// println!("In project {}:", cfg.proj_name());
+	// let branches = match Command::new("git")
+	// 		.arg("branch")
+	// 		.output() {
+	// 	Ok(o) =>
+	// }
 	let status = match Command::new("git")
 			.arg("status")
 			.output() {
@@ -115,16 +120,6 @@ pub fn print_git_data(cfg: &Config) {
 			return;
 		}
 	};
-	println!("Running git gc..");
-	match Command::new("git")
-			.arg("gc")
-			.output() {
-		Ok(_) => println!("Git gc finished."),
-		_ => {
-			println!("Cannot run git gc command!");
-			return;
-		}
-	}
 	let info = String::from_utf8(status.clone())
 			.unwrap_or(String::from("no git status found."));
 	for ln in info.lines() {
@@ -133,6 +128,16 @@ pub fn print_git_data(cfg: &Config) {
 				!ln.starts_with("no changes added to commit") &&
 				!ln.trim().is_empty() {
 			println!("{}", ln);
+		}
+	}
+	println!("Running git gc..");
+	match Command::new("git")
+			.arg("gc")
+			.output() {
+		Ok(_) => println!("Git gc finished."),
+		_ => {
+			println!("Cannot run git gc command!");
+			return;
 		}
 	}
 }

@@ -5,3 +5,8 @@ Cargo.lock
 *.o
 *.dll
 *.exe
+
+## Config ##
+
+.idea
+.vscode
