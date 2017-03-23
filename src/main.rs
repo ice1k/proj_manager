@@ -10,7 +10,7 @@ use model::*;
 use funcs::*;
 
 #[allow(unused_must_use, unused_variables)]
-fn repl(cfg: &Config) -> Result<()> {
+fn repl<'a>(cfg: &'a Config) -> Result<()> {
 	let name = cfg.proj_name();
 
 	loop {

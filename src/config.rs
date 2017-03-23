@@ -5,15 +5,17 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 // use std::io::prelude::*;
 
-fn open_file(path: String) -> Option<File> {
-	match File::open(path) {
+/// returns an opened file
+fn open_file<'a>(path: &'a String) -> Option<File> {
+	match File::open(path.clone()) {
 		Ok(f) => Some(f),
 		_ => None,
 	}
 }
 
+/// parse the configuration file
 pub fn parse_config(path: String) -> Option<Config> {
-	let file = match open_file(path.clone()) {
+	let file = match open_file(&path) {
 		Some(f) => f,
 		None => return None,
 	};

@@ -57,15 +57,15 @@ impl Config {
 	}
 
 	pub fn indent_line_1(&self) -> u8 {
-		self.indent_line_1.clone()
+		self.indent_line_1
 	}
 
 	pub fn indent_line_2(&self) -> u8 {
-		self.indent_line_2.clone()
+		self.indent_line_2
 	}
 
 	pub fn indent_line_3(&self) -> u8 {
-		self.indent_line_3.clone()
+		self.indent_line_3
 	}
 
 	pub fn is_ignored(&self, name: &String) -> bool {
