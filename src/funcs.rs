@@ -61,6 +61,9 @@ pub fn print_files(cfg: &Config) {
 #[allow(unused_must_use)]
 pub fn print_code_line_sum(cfg: &Config) {
 	static mut sum: u64 = 0;
+	unsafe {
+		sum = 0;
+	}
 	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
 		let mut bytes: Vec<u8> = Vec::new();
 		let mut lines: u64 = 1;
@@ -79,11 +82,13 @@ pub fn print_code_line_sum(cfg: &Config) {
 			_ => { },
 		}
 		let file_name = format!("{}", path.display());
-		println!("In {:<indent_1$} => {:<4} lines, {:<4} per line.",
+		println!("In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
 				file_name,
 				lines,
 				size / lines,
-				indent_1 = cfg.indent_line_1() as usize
+				indent_1 = cfg.indent_line_1() as usize,
+				indent_2 = cfg.indent_line_2() as usize,
+				indent_3 = cfg.indent_line_3() as usize
 		);
 		unsafe {
 			sum += lines;
@@ -108,7 +113,18 @@ pub fn print_git_data(cfg: &Config) {
 			return;
 		}
 	};
-	let info = String::from_utf8(status.clone()).unwrap();
+	println!("Running git gc..");
+	match Command::new("git")
+			.arg("gc")
+			.output() {
+		Ok(_) => println!("Git gc finished."),
+		_ => {
+			println!("Cannot run git gc command!");
+			return;
+		}
+	}
+	let info = String::from_utf8(status.clone())
+			.unwrap_or(String::from("no git status found."));
 	for ln in info.lines() {
 		// let ln = ln.trim();
 		if !ln.starts_with("  (use \"git ") &&
