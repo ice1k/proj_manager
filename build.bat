@@ -3,6 +3,7 @@ REM cargo build --release
 cargo build
 cd ./target/debug
 move *.exe ../../
+REM copy *.exe ../../
 cd ../../
 echo ===============================================
 echo ===============================================

@@ -2,6 +2,7 @@ mod config;
 mod model;
 mod files;
 mod funcs;
+mod lang;
 
 use std::io::{Result, stdin};
 

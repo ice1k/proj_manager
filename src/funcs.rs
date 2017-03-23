@@ -1,5 +1,6 @@
 use model::*;
 use files::*;
+use lang::*;
 
 use std::path::Path;
 use std::fs::{DirEntry, File};
@@ -53,7 +54,8 @@ pub fn print_meta(cfg: &Config) {
 #[allow(unused_must_use)]
 pub fn print_files(cfg: &Config) {
 	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
-		println!("{}", e.path().display());
+		let p = e.path();
+		println!("{}, Language: {}", p.display(), judge_lang_path(&p));
 	});
 }
 
@@ -140,7 +142,7 @@ pub fn build_proj(cfg: &Config) {
 	for i in cfg.build() {
 		println!("Running: {}", i);
 		match Command::new("call").arg(&i).output() {
-			Ok(o) => println!("{}", String::from_utf8(o.stdout).unwrap()),
+			Ok(o) => println!("{}", String::from_utf8(o.stdout).unwrap_or(String::new())),
 			_ => {
 				println!("Error while running this command!");
 				break;
