@@ -32,7 +32,7 @@ pub fn print_help() {
 /// print meta data
 /// stored in the cofiguration file
 pub fn print_meta(cfg: &Config) {
-	println!("Mame:");
+	println!("Name:");
 	println!("\t{}", cfg.proj_name());
 	println!("Path:");
 	println!("\t{}", cfg.path());
