@@ -1,5 +1,5 @@
 use std::path::Path;
-use std::ffi::OsStr;
+// use std::ffi::OsStr;
 
 trait Lang : ToString {
 	fn match_str(&self, s: String) -> bool;
@@ -7,9 +7,8 @@ trait Lang : ToString {
 	/// match the path
 	fn match_path<'a>(&self, path: &'a Path) -> bool {
 		path
-				.extension()
-				.map(OsStr::to_str)
-				.map(|it| self.match_str(String::from(it.unwrap_or(""))))
+				.to_str()
+				.map(|it| self.match_str(String::from(it)))
 				.unwrap_or(false)
 	}
 }
@@ -31,7 +30,7 @@ struct SimpleLang {
 
 impl Lang for SimpleLang {
 	fn match_str(&self, s: String) -> bool {
-		self.suffix.ends_with(&s)
+		s.ends_with(&self.suffix)
 	}
 }
 
@@ -119,6 +118,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("MPS", ".mps"),
 		slang!("Scheme", ".scm"),
 		slang!("Racket", ".rkt"),
+		slang!("Lisp", ".lisp"),
 		slang!("XHTML", ".xhtml"),
 		slang!("JavaScript", ".js"),
 		slang!("TypeScript", ".ts"),
@@ -130,30 +130,39 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("JSON", ".json"),
 		slang!("Lua", ".lua"),
 		slang!("PHP", ".php"),
+		slang!("AIML", ".aiml"),
+		slang!("TOML", ".toml"),
+		slang!("INI", ".ini"),
 		slang!("Swift", ".swift"),
-		// slang!("PureScript", "js"),
+		slang!("proj_manager config", "proj_config"),
+		slang!("Git Ignore", ".gitignore"),
+		slang!("Git Attributes", ".gitattributes"),
+		// slang!("PureScript", ".ps"),
 	];
 	let complex_langs = [
 		clang!("Java", ".java", ".jar", ".war", ".aar", ".class"),
 		clang!("C++", ".cpp", ".cc", ".hpp", ".C", ".cxx", ".hxx"),
 		clang!("C", ".c", ".h"),
-		clang!("XML", ".xml", ".iml", ".ipr", ".svg"),
+		clang!("XML", ".xml", ".iml", ".ipr", ".svg", ".icls"),
 		clang!("HTML", "html", "htm"),
+		slang!("Vim", ".vim", ".vimrc"),
 		clang!("Markdown", ".md", ".markdown"),
 		clang!("AsciiDoc", ".adoc", ".asciidoc"),
 		clang!("Haskell", ".hs", ".lhs"),
 		clang!("Kotlin", ".kt", ".kts"),
 		clang!("Groovy", ".groovy", ".gradle"),
+		slang!("EmacsLisp", ".el", ".emacs"),
 		clang!("Batch", ".bat", ".cmd"),
 		clang!("Visual Basic", ".vb", ".frm", ".vbs"),
 		clang!("CMake", "CMakeLists.txt", ".cmake"),
+		clang!("Manifest", ".MF", ".mf"),
 	];
-	for i in &simple_langs {
+	for i in &complex_langs {
 		if i.match_path(p) {
 			return i.to_string();
 		}
 	}
-	for i in &complex_langs {
+	for i in &simple_langs {
 		if i.match_path(p) {
 			return i.to_string();
 		}
