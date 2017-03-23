@@ -145,7 +145,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		clang!("C", ".c", ".h"),
 		clang!("XML", ".xml", ".iml", ".ipr", ".svg", ".icls"),
 		clang!("HTML", "html", "htm"),
-		slang!("Vim", ".vim", ".vimrc"),
+		clang!("Vim", ".vim", ".vimrc"),
 		clang!("Markdown", ".md", ".markdown"),
 		clang!("AsciiDoc", ".adoc", ".asciidoc"),
 		clang!("Haskell", ".hs", ".lhs"),
