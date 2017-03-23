@@ -151,7 +151,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		clang!("Haskell", ".hs", ".lhs"),
 		clang!("Kotlin", ".kt", ".kts"),
 		clang!("Groovy", ".groovy", ".gradle"),
-		slang!("EmacsLisp", ".el", ".emacs"),
+		clang!("EmacsLisp", ".el", ".emacs"),
 		clang!("Batch", ".bat", ".cmd"),
 		clang!("Visual Basic", ".vb", ".frm", ".vbs"),
 		clang!("CMake", "CMakeLists.txt", ".cmake"),
