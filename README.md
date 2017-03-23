@@ -1,12 +1,12 @@
 # proj_manager 💖
 
-This is a simple project manager, which gives you data about your project, to help you know  your project better.
+This is a simple project manager, which gives you data about your project, to help you know your project better.
 
 It's written in Rust.
 
 I write this project to practise Rust programming.
 
-For I'm a beginner to Rust, there must be some naive code, please don't hesitate to point it out :joy:.
+For I'm a beginner to Rust, there must be lots of naive code, please don't hesitate to point it out.
 
 ## Get binary!
 
@@ -39,6 +39,7 @@ ls             -- print all the files.
 exit           -- exit project manager.
 help           -- print this doc.
 line           -- see how many lines of code is here in your project.
+git            -- print git status.
 ```
 
 You can see how many lines of code is here in your project:
@@ -70,6 +71,9 @@ ign:.idea
 ign:.git
 ign-sfx:exe
 name:your project name
+idt-line-1:25
+idt-line-2:3
+idt-line-3:2
 ```
 
 key|value
