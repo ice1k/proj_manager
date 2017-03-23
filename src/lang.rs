@@ -157,12 +157,12 @@ pub fn judge_lang_path(p: &Path) -> String {
 		clang!("CMake", "CMakeLists.txt", ".cmake"),
 		clang!("Manifest", ".MF", ".mf"),
 	];
-	for i in &complex_langs {
+	for i in complex_langs.iter() {
 		if i.match_path(p) {
 			return i.to_string();
 		}
 	}
-	for i in &simple_langs {
+	for i in simple_langs.iter() {
 		if i.match_path(p) {
 			return i.to_string();
 		}
