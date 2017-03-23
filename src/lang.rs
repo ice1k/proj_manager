@@ -79,11 +79,19 @@ macro_rules! slang {
 }
 
 macro_rules! clang {
-	($x: expr, $($y: expr),+) => {
-		ComplexLang::new($x, vec!( $(y)+ ))
+	($x: expr, $($y: expr), +) => {
+		ComplexLang::new($x, vec!( $( String::from($y) , )+ ))
 	}
 }
 
+// macro_rules! clang {
+// 	($x: expr, $($y: expr), +) => {
+// 		ComplexLang::new($x, vec!( $( $y , )+ ))
+// 	}
+// }
+
+// o_O! old bad design
+//
 // struct Cpp { }
 // impl Lang for Cpp {
 // 	fn match_str(s: String) -> bool {
@@ -95,7 +103,7 @@ macro_rules! clang {
 // }
 
 pub fn judge_lang_path(p: &Path) -> String {
-	let langs = [
+	let simple_langs = [
 		slang!("Java", ".java"),
 		slang!("Golang", ".go"),
 		slang!("Rust", ".rs"),
@@ -104,12 +112,24 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("Scala", ".scala"),
 		slang!("C#", ".cs"),
 		slang!("Ruby", ".rb"),
-		clang!("C++", "cpp", "hpp"),
+		slang!("MPS", ".mps"),
 	];
-	for i in &langs {
+	let complex_langs = [
+		clang!("C++", ".cpp", ".cc", ".hpp", ".C"),
+		clang!("C", ".c", ".h"),
+		clang!("XML", ".xml", ".iml", ".ipr", ".svg"),
+		clang!("HTML", "html", "htm"),
+		clang!("XHTML", "xhtml"),
+	];
+	for i in &simple_langs {
 		if i.match_path(p) {
 			return i.to_string();
 		}
 	}
-	String::from("Unknown language")
+	for i in &complex_langs {
+		if i.match_path(p) {
+			return i.to_string();
+		}
+	}
+	String::from("Unknown")
 }

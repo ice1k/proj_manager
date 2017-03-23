@@ -11,6 +11,7 @@ pub struct Config {
 	indent_line_1: u8,
 	indent_line_2: u8,
 	indent_line_3: u8,
+	indent_ls_1: u8,
 }
 
 #[allow(dead_code)]
@@ -23,7 +24,9 @@ impl Config {
 				build: Vec<String>,
 				indent_line_1: u8,
 				indent_line_2: u8,
-				indent_line_3: u8) -> Config {
+				indent_line_3: u8,
+				indent_ls_1: u8,
+	) -> Config {
 		Config {
 			proj_name: proj_name,
 			path: path,
@@ -33,6 +36,7 @@ impl Config {
 			indent_line_1: indent_line_1,
 			indent_line_2: indent_line_2,
 			indent_line_3: indent_line_3,
+			indent_ls_1: indent_ls_1,
 		}
 	}
 
@@ -66,6 +70,10 @@ impl Config {
 
 	pub fn indent_line_3(&self) -> u8 {
 		self.indent_line_3
+	}
+
+	pub fn indent_ls_1(&self) -> u8 {
+		self.indent_ls_1
 	}
 
 	pub fn is_ignored(&self, name: &String) -> bool {

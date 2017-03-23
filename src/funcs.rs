@@ -55,7 +55,12 @@ pub fn print_meta(cfg: &Config) {
 pub fn print_files(cfg: &Config) {
 	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
 		let p = e.path();
-		println!("{}, Language: {}", p.display(), judge_lang_path(&p));
+		println!(
+				"{:<indent_1$} => Language: {}",
+				p.display(),
+				judge_lang_path(&p),
+				indent_1 = cfg.indent_ls_1() as usize
+		);
 	});
 }
 

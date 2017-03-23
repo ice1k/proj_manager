@@ -27,6 +27,7 @@ pub fn parse_config(path: String) -> Option<Config> {
 	let mut indent_line_1 = 32;
 	let mut indent_line_2 = 4;
 	let mut indent_line_3 = 4;
+	let mut indent_ls_1 = 32;
 	// let signs = [
 	// 	"ign:",
 	// 	"ign-sfx:",
@@ -54,6 +55,9 @@ pub fn parse_config(path: String) -> Option<Config> {
 		} else if ln.starts_with("idt-line-3:") {
 			let s: String = ln.drain(11..).collect();
 			indent_line_3 = s.parse().unwrap();
+		} else if ln.starts_with("idt-ls-1:") {
+			let s: String = ln.drain(9..).collect();
+			indent_ls_1 = s.parse().unwrap();
 		} else {
 			// ignore unknown commands
 		}
@@ -66,6 +70,7 @@ pub fn parse_config(path: String) -> Option<Config> {
 			build,
 			indent_line_1,
 			indent_line_2,
-			indent_line_3
+			indent_line_3,
+			indent_ls_1,
 	))
 }
