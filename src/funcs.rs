@@ -1,10 +1,12 @@
 use model::*;
 use files::*;
+use files::FileNode::*;
 use lang::*;
 
 use std::path::Path;
 use std::fs::{DirEntry, File};
-use std::io::Read;
+use std::fs;
+use std::io::{Read, BufReader, BufRead};
 use std::process::{exit, Command};
 
 /// exit
@@ -98,13 +100,45 @@ pub fn print_code_line_sum(cfg: &Config) {
 			indent_2 = cfg.indent_line_2() as usize,
 			indent_3 = cfg.indent_line_3() as usize
 		);
-		unsafe {
-			sum += lines;
-		}
+		//		unsafe {
+		//			sum += lines;
+		//		}
 	});
 	unsafe {
 		println!("Total: {} lines of code.", sum);
 	}
+}
+
+pub fn print_code_line_new(cfg: &Config) {
+	let root = build_file_tree(cfg, Path::new("."));
+	fn rec_visit(cfg: &Config, node: FileNode, sum: u64) -> u64 {
+		match node {
+			FileLeaf(f) => {
+				//				let file: File = *f;
+				let r = BufReader::new(f);
+				let lines = r.lines().count() as u64;
+				println!(
+					"In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
+					format!("{}", f),
+					lines,
+					r.chars().count() as u64 / lines,
+					indent_1 = cfg.indent_line_1() as usize,
+					indent_2 = cfg.indent_line_2() as usize,
+					indent_3 = cfg.indent_line_3() as usize
+				);
+				sum + lines
+			},
+			Directory(vec) => {
+				let mut sum = sum;
+				//				let vec: Vec<FileNode> = *vec;
+				for i in vec {
+					sum += rec_visit(cfg, i, 0)
+				}
+				sum
+			}
+		}
+	}
+	println!("Total: {} lines of code.", rec_visit(cfg, root, 0));
 }
 
 pub fn print_git_data(cfg: &Config) {

@@ -1,5 +1,5 @@
 use std::io::{Result};
-use std::fs::{self, DirEntry};
+use std::fs::{self, DirEntry, File};
 use std::path::{Path};
 
 use model::*;
@@ -30,4 +30,33 @@ pub fn visit_files(cfg: &Config, dir: &Path, func: &Fn(&DirEntry)) -> Result<()>
 		func(&e);
 	}
 	Ok(())
+}
+
+pub enum FileNode {
+	Directory(Vec<FileNode>),
+	FileLeaf(File)
+}
+
+pub fn build_file_tree(cfg: &Config, dir: &Path) -> FileNode {
+	if fs::metadata(dir).unwrap().is_dir() {
+		let mut v = vec![];
+		for e in fs::read_dir(dir).unwrap() {
+			let e = e.unwrap();
+			let e_path = e.path();
+			let s = String::from(e
+					.file_name()
+					.to_str()
+					.expect("WTF!"));
+			if !cfg.is_ignored(&s) && !cfg.is_ignored_suffix(&s) {
+				v.push(build_file_tree(cfg, &e_path));
+			}
+		}
+		FileNode::Directory(v)
+	} else {
+		FileNode::FileLeaf(File::create(dir
+				.to_str()
+				.unwrap())
+				.unwrap()
+		)
+	}
 }
