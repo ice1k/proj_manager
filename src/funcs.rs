@@ -4,8 +4,7 @@ use files::FileNode::*;
 use lang::*;
 
 use std::path::Path;
-use std::fs::{DirEntry, File};
-use std::fs;
+use std::fs::DirEntry;
 use std::io::{Read, BufReader, BufRead};
 use std::process::{exit, Command};
 
@@ -67,61 +66,19 @@ pub fn print_files(cfg: &Config) {
 }
 
 /// print how many lines of code is here
-#[allow(unused_must_use)]
-pub fn print_code_line_sum(cfg: &Config) {
-	let mut sum: u64 = 0;
-	unsafe {
-		sum = 0;
-	}
-	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
-		let mut bytes: Vec<u8> = Vec::new();
-		let mut lines: u64 = 1;
-		let path = e.path();
-		let mut f = File::open(path.clone()).unwrap();
-		let mut size: u64 = 0;
-		match f.read_to_end(&mut bytes) {
-			Ok(s) => {
-				size = s as u64;
-				let mut cnt = 0;
-				for i in &bytes {
-					if *i == '\n' as u8 { cnt += 1; }
-				}
-				lines += cnt;
-			},
-			_ => {},
-		}
-		let file_name = format!("{}", path.display());
-		println!(
-			"In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
-			file_name,
-			lines,
-			size / lines,
-			indent_1 = cfg.indent_line_1() as usize,
-			indent_2 = cfg.indent_line_2() as usize,
-			indent_3 = cfg.indent_line_3() as usize
-		);
-		//		unsafe {
-		//			sum += lines;
-		//		}
-	});
-	unsafe {
-		println!("Total: {} lines of code.", sum);
-	}
-}
-
 pub fn print_code_line_new(cfg: &Config) {
 	let root = build_file_tree(cfg, Path::new("."));
 	fn rec_visit(cfg: &Config, node: FileNode, sum: u64) -> u64 {
 		match node {
-			FileLeaf(f) => {
-				//				let file: File = *f;
-				let r = BufReader::new(f);
-				let lines = r.lines().count() as u64;
+			FileLeaf(fw) => {
+				let br = BufReader::new(fw.f());
+				let lines = br.lines().count() as u64;
+				let br = BufReader::new(fw.f());
 				println!(
 					"In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
-					format!("{}", f),
+					fw.name(),
 					lines,
-					r.chars().count() as u64 / lines,
+					br.bytes().count() as u64 / lines,
 					indent_1 = cfg.indent_line_1() as usize,
 					indent_2 = cfg.indent_line_2() as usize,
 					indent_3 = cfg.indent_line_3() as usize

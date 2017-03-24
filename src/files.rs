@@ -32,9 +32,29 @@ pub fn visit_files(cfg: &Config, dir: &Path, func: &Fn(&DirEntry)) -> Result<()>
 	Ok(())
 }
 
+pub struct FileWrapper {
+	name: String,
+}
+
+impl FileWrapper {
+	pub fn new(name: String) -> FileWrapper {
+		FileWrapper {
+			name: name
+		}
+	}
+
+	pub fn f(&self) -> File {
+		File::open(self.name()).unwrap()
+	}
+
+	pub fn name(&self) -> String {
+		self.name.clone()
+	}
+}
+
 pub enum FileNode {
 	Directory(Vec<FileNode>),
-	FileLeaf(File)
+	FileLeaf(FileWrapper)
 }
 
 pub fn build_file_tree(cfg: &Config, dir: &Path) -> FileNode {
@@ -53,10 +73,7 @@ pub fn build_file_tree(cfg: &Config, dir: &Path) -> FileNode {
 		}
 		FileNode::Directory(v)
 	} else {
-		FileNode::FileLeaf(File::create(dir
-				.to_str()
-				.unwrap())
-				.unwrap()
-		)
+		let name = dir.to_str().unwrap();
+		FileNode::FileLeaf(FileWrapper::new(String::from(name)))
 	}
 }
