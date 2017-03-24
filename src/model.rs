@@ -49,7 +49,9 @@ impl Config {
             } else if main_index == 1 {
                 self.vec_fileds[sub_index].push(item.to_string());
             } else if main_index == 2 {
-                self.ui8_fileds[sub_index] = item.parse().unwrap();
+                if let Ok(value) = item.parse() {
+                    self.ui8_fileds[sub_index] = value;
+                }
             } else {
                 panic!("unexpected error")
             }
@@ -117,11 +119,6 @@ impl Config {
     }
 
     pub fn is_ignored_suffix(&self, name: &String) -> bool {
-        for sfx in &self.ignored_suffix() {
-            if name.ends_with(sfx) {
-                return true;
-            }
-        }
-        false
+        self.ignored_suffix().iter().any(|x| name.ends_with(x))
     }
 }
