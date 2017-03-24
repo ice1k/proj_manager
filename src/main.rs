@@ -39,7 +39,11 @@ fn main() {
 	// println!("{}", parse_config("./Cargo.toml"));
 	let cfg = match parse_config(String::from("./proj_config")) {
 		Some(c) => c,
-		None => panic!("internal error!"),
+		None => {
+			println!("Load failed DA★ZE...\nplease create a file naming 'proj_config' here.");
+			return;
+			// panic!("internal error!");
+		},
 	};
 	// println!("✔proj_manager v0.1.0, open source under GNU General Public License v3.0.");
 	// println!("😘See: https://github.com/ice1000/proj_manager");
