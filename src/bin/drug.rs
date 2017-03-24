@@ -5,12 +5,8 @@ fn this_function_is_like_drug() {
 	let status = match Command::new("git")
 			.arg("status")
 			.output() {
-		Ok(o) => {
-			o.stdout
-		},
-		_ => {
-			panic!("WTF???");
-		}
+		Ok(o) => o.stdout,
+		_ => panic!("WTF???"),
 	};
 	println!("fuck:");
 	println!("{}", match String::from_utf8(status) {
