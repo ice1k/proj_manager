@@ -22,7 +22,7 @@ pub fn go_die() -> ! {
 /// print help
 pub fn print_help() {
 	println!("Commands:");
-	println!("data           -- print the meta data stored in the cofiguration file.");
+	println!("data           -- print the meta data stored in the configuration file.");
 	println!("ls             -- print all the files.");
 	println!("exit           -- exit project manager.");
 	println!("help           -- print this doc.");
@@ -31,7 +31,7 @@ pub fn print_help() {
 }
 
 /// print meta data
-/// stored in the cofiguration file
+/// stored in the configuration file
 pub fn print_meta(cfg: &Config) {
 	println!("Name:");
 	println!("\t{}", cfg.proj_name());
@@ -66,7 +66,7 @@ pub fn print_files(cfg: &Config) {
 }
 
 /// print how many lines of code is here
-pub fn print_code_line_new(cfg: &Config) {
+pub fn print_code_line(cfg: &Config) {
 	let root = build_file_tree(cfg, Path::new("."));
 	fn rec_visit(cfg: &Config, node: FileNode, sum: u64) -> u64 {
 		match node {
