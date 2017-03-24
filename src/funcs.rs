@@ -108,42 +108,56 @@ pub fn print_code_line_sum(cfg: &Config) {
 
 pub fn print_git_data(cfg: &Config) {
 	// println!("In project {}:", cfg.proj_name());
-	// let branches = match Command::new("git")
-	// 		.arg("branch")
-	// 		.output() {
-	// 	Ok(o) =>
-	// }
 	let status = match Command::new("git")
 			.arg("status")
 			.output() {
-		Ok(o) => {
-			println!("Git root detected in {}.", cfg.proj_name());
-			o.stdout
-		},
+		Ok(o) => o.stdout,
 		_ => {
-			println!("{} is not a git repository.", cfg.proj_name());
+			println!("Cannot run \'git status\' in {}.", cfg.proj_name());
 			return;
 		}
 	};
-	let info = String::from_utf8(status.clone())
+	let branches = match Command::new("git")
+			.arg("branch")
+			.output() {
+		Ok(o) => o.stdout,
+		_ => {
+			println!("Cannot run \'git branch\' in {}.", cfg.proj_name());
+			return;
+		}
+	};
+	let status = String::from_utf8(status.clone())
 			.unwrap_or(String::from("no git status found."));
-	for ln in info.lines() {
+	let mut first = true;
+	for ln in status.lines() {
 		// let ln = ln.trim();
+		if first {
+			if ln.starts_with("fatal:") {
+				break;
+			} else {
+				println!("Git root detected in {}.", cfg.proj_name());
+			}
+		}
+		first = false;
 		if !ln.starts_with("  (use \"git ") &&
 				!ln.starts_with("no changes added to commit") &&
 				!ln.trim().is_empty() {
 			println!("{}", ln);
 		}
 	}
-	println!("Running git gc..");
-	match Command::new("git")
-			.arg("gc")
-			.output() {
-		Ok(_) => println!("Git gc finished."),
-		_ => {
-			println!("Cannot run git gc command!");
-			return;
+	if !first {
+		println!("Running git gc..");
+		match Command::new("git")
+				.arg("gc")
+				.output() {
+			Ok(_) => println!("Git gc finished."),
+			_ => {
+				println!("Cannot run \'git gc\' in {}.", cfg.proj_name());
+				return;
+			}
 		}
+	} else {
+		println!("No git root detected in {}.", cfg.proj_name());
 	}
 }
 

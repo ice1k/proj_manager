@@ -124,6 +124,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("TypeScript", ".ts"),
 		slang!("CoffeeScript", ".coffee"),
 		slang!("HobbyScript", ".hh"),
+		slang!("PureScript", ".purs"),
 		slang!("Shell", ".sh"),
 		slang!("CSS", ".css"),
 		slang!("SASS", ".sass"),
@@ -137,7 +138,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("proj_manager config", "proj_config"),
 		slang!("Git Ignore", ".gitignore"),
 		slang!("Git Attributes", ".gitattributes"),
-		slang!("PureScript", ".purs"),
+		slang!("Properties", ".properties"),
 	];
 	let complex_langs = [
 		clang!("Java", ".java", ".jar", ".war", ".aar", ".class"),
@@ -155,7 +156,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		clang!("Batch", ".bat", ".cmd"),
 		clang!("Visual Basic", ".vb", ".frm", ".vbs"),
 		clang!("CMake", "CMakeLists.txt", ".cmake"),
-		clang!("Manifest", ".MF", ".mf"),
+		clang!("Manifest", ".MF", ".mf", ".manifest"),
 	];
 	for i in complex_langs.iter() {
 		if i.match_path(p) {
