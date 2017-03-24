@@ -26,7 +26,7 @@ fn repl<'a>(cfg: &'a Config, root: &'a FileNode) -> Result<()> {
 			"ls" => print_files(cfg),
 			"help" => print_help(),
 			"exit" => go_die(),
-			"line" => print_code_line(cfg),
+			"line" => print_code_line(cfg, root),
 			"git" => print_git_data(cfg),
 			"build" => build_proj(cfg),
 			// "cls" => clear_screen(),
@@ -56,8 +56,6 @@ fn main() {
 	println!("Input \"help\" to get help.");
 	println!("");
 
-	let root = get_root(&cfg);
-
-	repl(&cfg, &root);
+	repl(&cfg, &get_root(&cfg));
 }
 

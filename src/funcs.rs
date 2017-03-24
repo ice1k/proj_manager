@@ -66,7 +66,8 @@ pub fn print_files(cfg: &Config) {
 }
 
 /// print how many lines of code is here
-pub fn print_code_line(cfg: &Config) {
+/// prepare to use incremental calculation
+pub fn print_code_line(cfg: &Config, root_origin: &FileNode) {
 	let root = build_file_tree(cfg, Path::new("."));
 	fn rec_visit(cfg: &Config, node: FileNode, sum: u64) -> u64 {
 		match node {
