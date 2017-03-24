@@ -38,9 +38,9 @@ pub fn parse_config(path: String) -> Option<Config> {
 	// ];
 	for ln in BufRead::lines(buf) {
 		let mut ln = ln.unwrap_or(String::from(""));
-		if ln.starts_with("#") {
-			continue;
-		}
+		// if ln.starts_with("#") {
+		// 	continue;
+		// }
 		if ln.starts_with("ign:") {
 			ignored.push(ln.drain(4..).collect());
 		} else if ln.starts_with("ign-sfx:") {
