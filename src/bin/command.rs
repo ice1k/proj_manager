@@ -3,7 +3,7 @@
 // use std::process::Command;
 
 // 我祝你亲妈爆炸
-/// 我不明白！
+// 我不明白！
 // fn main() {
 	// match Command::new("call")
 	// 		// .env("PATH", ".")
@@ -17,3 +17,4 @@
 		// libc::system(command);
 	// }
 // }
+fn main() {  }
