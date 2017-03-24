@@ -9,9 +9,10 @@ use std::io::{Result, stdin};
 use config::*;
 use model::*;
 use funcs::*;
+use files::*;
 
 #[allow(unused_must_use, unused_variables)]
-fn repl<'a>(cfg: &'a Config) -> Result<()> {
+fn repl<'a>(cfg: &'a Config, root: &'a FileNode) -> Result<()> {
 	let name = cfg.proj_name();
 
 	loop {
@@ -55,6 +56,8 @@ fn main() {
 	println!("Input \"help\" to get help.");
 	println!("");
 
-	repl(&cfg);
+	let root = get_root(&cfg);
+
+	repl(&cfg, &root);
 }
 

@@ -11,6 +11,8 @@ use model::*;
 // 	}
 // }
 
+/// visit the files undef current file
+/// recursively
 pub fn visit_files(cfg: &Config, dir: &Path, func: &Fn(&DirEntry)) -> Result<()> {
 	if fs::metadata(dir)?.is_dir() {
 		for e in fs::read_dir(dir)? {
@@ -76,4 +78,8 @@ pub fn build_file_tree(cfg: &Config, dir: &Path) -> FileNode {
 		let name = dir.to_str().unwrap();
 		FileNode::FileLeaf(FileWrapper::new(String::from(name)))
 	}
+}
+
+pub fn get_root(cfg: &Config) -> FileNode {
+	build_file_tree(&cfg, Path::new("."))
 }

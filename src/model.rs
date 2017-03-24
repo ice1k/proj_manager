@@ -1,6 +1,8 @@
 // pub type String = String;
 // pub type String = &'static str;
 
+use files::FileNode;
+
 #[allow(dead_code)]
 pub struct Config {
 	proj_name: String,
