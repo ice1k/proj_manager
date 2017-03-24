@@ -41,9 +41,13 @@ fn main() {
 		Some(c) => c,
 		None => panic!("internal error!"),
 	};
+	// println!("✔proj_manager v0.1.0, open source under GNU General Public License v3.0.");
+	// println!("😘See: https://github.com/ice1000/proj_manager");
+	// println!("😜Load success DA★ZE.");
+	// println!("👀Input \"help\" to get help.");
 	println!("proj_manager v0.1.0, open source under GNU General Public License v3.0.");
 	println!("See: https://github.com/ice1000/proj_manager");
-	println!("Load success.");
+	println!("Load success DA★ZE!.");
 	println!("Input \"help\" to get help.");
 	println!("");
 

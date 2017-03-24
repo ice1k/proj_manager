@@ -2,17 +2,17 @@
 
 This is a simple project manager, which gives you data about your project, to help you know your project better.
 
-It's written in Rust.
+It's written in Rust DA★ZE.
 
-I write this project to practise Rust programming.
+I write this project to practise Rust programming DA★ZE.
 
-For I'm a beginner to Rust, there must be lots of naive code, please don't hesitate to point it out.
+For I'm a beginner to Rust, there must be lots of naive code, please don't hesitate to point it out DA★ZE!
 
 ## Get binary!
 
 ### Windows
 
-Go to the release page, download the latest exe.
+Go to the release page, download the latest exe DA★ZE.
 
 ### Other
 
@@ -27,7 +27,7 @@ Open the binary in your project root(where your proj_config file is), you'll see
 ```
 proj_manager v0.1.0, open source under GNU General Public License v3.0.
 See: https://github.com/ice1000/proj_manager
-Load success.
+Load success DA★ZE.
 ```
 
 You can type 'help' to get help(the content is different in versions):
@@ -82,3 +82,7 @@ key|value
 ign|ignore files with given name
 ign-sfx|ignore files with given suffix
 name|you project name
+
+## WTF is `DA★ZE`?
+
+`DA★ZE` has no actual meaning, just for fun DA★ZE~
