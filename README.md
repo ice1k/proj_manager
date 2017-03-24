@@ -2,17 +2,17 @@
 
 This is a simple project manager, which gives you data about your project, to help you know your project better.
 
-It's written in Rust DA★ZE.
+It's written in Rust.
 
-I write this project to practise Rust programming DA★ZE.
+I write this project to practise Rust programming.
 
-For I'm a beginner to Rust, there must be lots of naive code, please don't hesitate to point it out DA★ZE!
+For I'm a beginner to Rust, there must be lots of naive code, please don't hesitate to point it out!
 
 ## Get binary!
 
 ### Windows
 
-Go to the release page, download the latest exe DA★ZE.
+Go to the release page, download the latest exe.
 
 ### Other
 
@@ -82,7 +82,3 @@ key|value
 ign|ignore files with given name
 ign-sfx|ignore files with given suffix
 name|you project name
-
-## WTF is `DA★ZE`?
-
-`DA★ZE` has no actual meaning, just for fun DA★ZE~
