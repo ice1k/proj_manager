@@ -1,7 +1,7 @@
 use std::path::Path;
 // use std::ffi::OsStr;
 
-trait Lang : ToString {
+trait Lang: ToString {
 	fn match_str(&self, s: String) -> bool;
 
 	/// match the path

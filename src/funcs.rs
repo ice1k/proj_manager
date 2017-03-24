@@ -10,7 +10,7 @@ use std::process::{exit, Command};
 /// exit
 pub fn go_die() -> ! {
 	println!("Have a nice day :)");
-	exit(0);
+	exit(0)
 }
 
 /// clear the screen
@@ -56,10 +56,10 @@ pub fn print_files(cfg: &Config) {
 	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
 		let p = e.path();
 		println!(
-				"{:<indent_1$} => Language: {}",
-				p.display(),
-				judge_lang_path(&p),
-				indent_1 = cfg.indent_ls_1() as usize
+			"{:<indent_1$} => Language: {}",
+			p.display(),
+			judge_lang_path(&p),
+			indent_1 = cfg.indent_ls_1() as usize
 		);
 	});
 }
@@ -67,7 +67,7 @@ pub fn print_files(cfg: &Config) {
 /// print how many lines of code is here
 #[allow(unused_must_use)]
 pub fn print_code_line_sum(cfg: &Config) {
-	static mut sum: u64 = 0;
+	let mut sum: u64 = 0;
 	unsafe {
 		sum = 0;
 	}
@@ -86,16 +86,17 @@ pub fn print_code_line_sum(cfg: &Config) {
 				}
 				lines += cnt;
 			},
-			_ => { },
+			_ => {},
 		}
 		let file_name = format!("{}", path.display());
-		println!("In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
-				file_name,
-				lines,
-				size / lines,
-				indent_1 = cfg.indent_line_1() as usize,
-				indent_2 = cfg.indent_line_2() as usize,
-				indent_3 = cfg.indent_line_3() as usize
+		println!(
+			"In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
+			file_name,
+			lines,
+			size / lines,
+			indent_1 = cfg.indent_line_1() as usize,
+			indent_2 = cfg.indent_line_2() as usize,
+			indent_3 = cfg.indent_line_3() as usize
 		);
 		unsafe {
 			sum += lines;
@@ -126,6 +127,12 @@ pub fn print_git_data(cfg: &Config) {
 			return;
 		}
 	};
+	let branches = String::from_utf8(branches.clone())
+			.unwrap_or(String::from("no git branches found."));
+	println!("Branches:");
+	for ln in branches.lines() {
+		println!("\t{}", ln);
+	}
 	let status = String::from_utf8(status.clone())
 			.unwrap_or(String::from("no git status found."));
 	let mut first = true;

@@ -66,14 +66,14 @@ pub fn parse_config(path: String) -> Option<Config> {
 		}
 	}
 	Some(Config::new(
-			proj_name,
-			path,
-			ignored,
-			ignored_suffix,
-			build,
-			indent_line_1,
-			indent_line_2,
-			indent_line_3,
-			indent_ls_1,
+		proj_name,
+		path,
+		ignored,
+		ignored_suffix,
+		build,
+		indent_line_1,
+		indent_line_2,
+		indent_line_3,
+		indent_ls_1,
 	))
 }

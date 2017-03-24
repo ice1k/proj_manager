@@ -17,15 +17,15 @@ pub struct Config {
 #[allow(dead_code)]
 impl Config {
 	pub fn new(
-				proj_name: String,
-				path: String,
-				ignored: Vec<String>,
-				ignored_suffix: Vec<String>,
-				build: Vec<String>,
-				indent_line_1: u8,
-				indent_line_2: u8,
-				indent_line_3: u8,
-				indent_ls_1: u8,
+		proj_name: String,
+		path: String,
+		ignored: Vec<String>,
+		ignored_suffix: Vec<String>,
+		build: Vec<String>,
+		indent_line_1: u8,
+		indent_line_2: u8,
+		indent_line_3: u8,
+		indent_ls_1: u8,
 	) -> Config {
 		Config {
 			proj_name: proj_name,
