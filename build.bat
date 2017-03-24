@@ -6,6 +6,9 @@ move *.exe ../../
 REM copy *.exe ../../
 cd ../../
 del /s /f /q mng.exe
+del /s /f /q command.exe
+del /s /f /q drug.exe
+del /s /f /q string_apis.exe
 rename proj_manager.exe mng.exe
 echo ===============================================
 echo ===============================================
