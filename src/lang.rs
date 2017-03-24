@@ -137,7 +137,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("proj_manager config", "proj_config"),
 		slang!("Git Ignore", ".gitignore"),
 		slang!("Git Attributes", ".gitattributes"),
-		// slang!("PureScript", ".ps"),
+		slang!("PureScript", ".purs"),
 	];
 	let complex_langs = [
 		clang!("Java", ".java", ".jar", ".war", ".aar", ".class"),
