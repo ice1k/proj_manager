@@ -161,17 +161,10 @@ pub fn print_git_data(cfg: &Config) {
 	}
 }
 
-#[allow(dead_code)]
+// #[allow(dead_code)]
 pub fn build_proj(cfg: &Config) {
 	for i in cfg.build() {
 		println!("Running: {}", i);
-		match Command::new("call").arg(&i).output() {
-			Ok(o) => println!("{}", String::from_utf8(o.stdout).unwrap_or(String::new())),
-			_ => {
-				println!("Error while running this command!");
-				break;
-			},
-		}
 	}
 }
 
