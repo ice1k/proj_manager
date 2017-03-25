@@ -107,7 +107,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("Io", ".io"),
 		slang!("Erlang", ".erl"),
 		slang!("Lice", ".lice"),
-		slang!("D", ".d"),
+		slang!("R", ".R"),
 		slang!("Rust", ".rs"),
 		slang!("Coq", ".v"),
 		slang!("Clojure", ".clj"),
@@ -139,14 +139,16 @@ pub fn judge_lang_path(p: &Path) -> String {
 		slang!("Git Ignore", ".gitignore"),
 		slang!("Git Attributes", ".gitattributes"),
 		slang!("Properties", ".properties"),
+		slang!("SBT", ".sbt"),
 	];
 	let complex_langs = [
 		clang!("Java", ".java", ".jar", ".war", ".aar", ".class"),
-		clang!("C++", ".cpp", ".cc", ".hpp", ".C", ".cxx", ".hxx"),
+		clang!("C++", ".cpp", ".cc", ".hpp", ".C", ".cxx", ".hxx", ".c++", ".h++"),
+		clang!("D", ".di", ".d"),
 		clang!("C", ".c", ".h"),
 		clang!("XML", ".xml", ".iml", ".ipr", ".svg", ".icls"),
 		clang!("HTML", "html", "htm"),
-		clang!("Vim", ".vim", ".vimrc"),
+		clang!("VimL", ".vim", ".viml", ".vimrc"),
 		clang!("Markdown", ".md", ".markdown"),
 		clang!("AsciiDoc", ".adoc", ".asciidoc"),
 		clang!("Haskell", ".hs", ".lhs"),
@@ -155,7 +157,7 @@ pub fn judge_lang_path(p: &Path) -> String {
 		clang!("EmacsLisp", ".el", ".emacs"),
 		clang!("Batch", ".bat", ".cmd"),
 		clang!("Visual Basic", ".vb", ".frm", ".vbs"),
-		clang!("CMake", "CMakeLists.txt", ".cmake"),
+		clang!("CMake", "CMakeLists.txt", ".cmake", ".make"),
 		clang!("Manifest", ".MF", ".mf", ".manifest"),
 	];
 	for i in complex_langs.iter() {
