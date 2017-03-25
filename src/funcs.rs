@@ -75,9 +75,9 @@ pub fn print_code_line(cfg: &Config, root_origin: &FileNode) {
 				let br = BufReader::new(fw.f());
 				let lines = br.lines().count() as u64;
 				let br = BufReader::new(fw.f());
-				let per_byte=if lines!=0{
+				let per_byte = if lines != 0 {
 					br.bytes().count() as u64 / lines
-				}else {
+				} else {
 					0
 				};
 				println!(
