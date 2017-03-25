@@ -1,6 +1,6 @@
 use std::collections::BTreeMap;
 
-type FiledIndex = (usize, usize);
+type FieldIndex = (usize, usize);
 
 #[allow(dead_code)]
 pub struct Config {
@@ -8,7 +8,7 @@ pub struct Config {
 	vac_fields: Vec<Vec<String>>,
 	ui8_fields: Vec<u8>,
 
-	filed_map: BTreeMap<String, FiledIndex>,
+	field_map: BTreeMap<String, FieldIndex>,
 }
 
 #[allow(dead_code)]
@@ -28,7 +28,7 @@ impl Config {
 			str_fields: vec![proj_name, path],
 			vac_fields: vec![ignored, ignored_suffix, build],
 			ui8_fields: vec![indent_ls_1, indent_line_1, indent_line_2, indent_line_3],
-			filed_map: Config::field_map(),
+			field_map: Config::field_map(),
 		}
 	}
 
@@ -47,8 +47,8 @@ impl Config {
 	}
 
 	pub fn set_fields(&mut self, name: &str, item: &str) -> bool {
-		if let Some(filed_index) = self.filed_map.get(name) {
-			let &(main_index, sub_index) = filed_index;
+		if let Some(field_index) = self.field_map.get(name) {
+			let &(main_index, sub_index) = field_index;
 			if main_index == 0 {
 				self.str_fields[sub_index] = item.to_string();
 			} else if main_index == 1 {
@@ -66,8 +66,8 @@ impl Config {
 		}
 	}
 
-	pub fn field_map() -> BTreeMap<String, FiledIndex> {
-		let mut result: BTreeMap<String, FiledIndex> = BTreeMap::new();
+	pub fn field_map() -> BTreeMap<String, FieldIndex> {
+		let mut result: BTreeMap<String, FieldIndex> = BTreeMap::new();
 		result.insert("name".to_string(), (0, 0));
 		result.insert("path".to_string(), (0, 1));
 
@@ -77,8 +77,8 @@ impl Config {
 
 		result.insert("idt-ls-1".to_string(), (2, 0));
 		result.insert("idt-line-1".to_string(), (2, 1));
-		result.insert("idt-line-1".to_string(), (2, 2));
-		result.insert("idt-line-1".to_string(), (2, 3));
+		result.insert("idt-line-2".to_string(), (2, 2));
+		result.insert("idt-line-3".to_string(), (2, 3));
 
 		result
 	}
