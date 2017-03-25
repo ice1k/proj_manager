@@ -75,11 +75,16 @@ pub fn print_code_line(cfg: &Config, root_origin: &FileNode) {
 				let br = BufReader::new(fw.f());
 				let lines = br.lines().count() as u64;
 				let br = BufReader::new(fw.f());
+				let per_byte=if lines!=0{
+					br.bytes().count() as u64 / lines
+				}else {
+					0
+				};
 				println!(
 					"In {:<indent_1$} => {:<indent_2$} lines, {:<indent_3$} per line.",
 					fw.name(),
 					lines,
-					br.bytes().count() as u64 / lines,
+					per_byte,
 					indent_1 = cfg.indent_line_1() as usize,
 					indent_2 = cfg.indent_line_2() as usize,
 					indent_3 = cfg.indent_line_3() as usize
