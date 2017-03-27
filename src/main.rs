@@ -23,7 +23,7 @@ fn repl<'a>(cfg: &'a Config, root: &'a FileNode) -> Result<()> {
 		let i = input.trim();
 		match i {
 			"data" => print_meta(cfg),
-			"ls" => print_files(cfg),
+			"ls" => print_files(cfg, root),
 			"help" => print_help(),
 			"exit" => go_die(),
 			"line" => print_code_line(cfg, root),

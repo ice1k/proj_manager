@@ -53,16 +53,28 @@ pub fn print_meta(cfg: &Config) {
 
 /// list the files
 #[allow(unused_must_use)]
-pub fn print_files(cfg: &Config) {
-	visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
-		let p = e.path();
-		println!(
-			"{:<indent_1$} => Language: {}",
-			p.display(),
-			judge_lang_path(&p),
-			indent_1 = cfg.indent_ls_1() as usize
-		);
-	});
+pub fn print_files(cfg: &Config, root_origin: &FileNode) {
+	// visit_files(&cfg, Path::new("."), &|e: &DirEntry| {
+	// 	let p = e.path();
+	// 	println!(
+	// 		"{:<indent_1$} => Language: {}",
+	// 		p.display(),
+	// 		judge_lang_path(&p),
+	// 		indent_1 = cfg.indent_ls_1() as usize
+	// 	);
+	// });
+	let root = build_file_tree(cfg, Path::new("."));
+	fn rec_visit(cfg: &Config, node: FileNode) {
+		match node {
+			FileLeaf(fw) => {
+				//
+			},
+			Directory(vec) => {
+				//
+			},
+		}
+	}
+	rec_visit(cfg, root);
 }
 
 /// print how many lines of code is here
