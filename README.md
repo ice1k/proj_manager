@@ -1,6 +1,6 @@
 # proj_manager 💖
 
-
+[![Build Status](https://travis-ci.org/ice1000/proj_manager.svg?branch=master)](https://travis-ci.org/ice1000/proj_manager)
 
 This is a simple project manager, which gives you data about your project, to help you know your project better.
 
